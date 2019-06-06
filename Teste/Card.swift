@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct Card : Encodable {
+    
+    let nome: String
+    let cor: String
+    let ataque: Int
+    let defesa: Int
+}

@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Response : Decodable {
+    
+    var statusCode: Int
+    var body: String
+}
