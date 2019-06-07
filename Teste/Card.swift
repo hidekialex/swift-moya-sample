@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Classe que representa o JSON de request. A classe extende a classe Encodable
 struct Card : Encodable {
     
     let nome: String

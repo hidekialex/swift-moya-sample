@@ -8,6 +8,7 @@
 
 import Foundation
 
+// classe que representa a response do servidor, classe extende Decodable
 struct Response : Decodable {
     
     var statusCode: Int

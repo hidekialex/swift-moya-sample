@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         let cor = self.tfCor.text!
         
         let card = Card(nome: nome, cor: cor, ataque: 2, defesa: 3)
-        
+ 
         chamador.request(Servicos.criarCarta(card: card)) { (result) in
             switch result {
             case .success(let response):
