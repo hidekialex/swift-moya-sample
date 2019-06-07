@@ -11,32 +11,32 @@ import Moya
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tfNome: UITextField!
+    @IBOutlet weak var tfCor: UITextField!
+    @IBOutlet weak var btnCriar: UIButton!
+    
+    let chamador = MoyaProvider<Servicos>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //aqui esta instanciando o objeto do moya que chama o servidor
-        let chamador = MoyaProvider<Servicos>()
+    }
+    
+    @IBAction func onClickCriae(_ sender: Any) {
+    
+        let nome = self.tfNome.text!
+        let cor = self.tfCor.text!
         
-        //// eu to criando um objeto que vai ser transformado
-        // em json e mandado pro servidor
-        /*
-         {
-            "nome": "nome",
-            "cor": "red",
-            "ataque": 2,
-            "defesa": 1
-         }
-         */
-        let card = Card(nome: "Goblin", cor: "Red", ataque: 2, defesa: 3)
+        let card = Card(nome: nome, cor: cor, ataque: 2, defesa: 3)
         
-        //
         chamador.request(Servicos.criarCarta(card: card)) { (result) in
             switch result {
-                case .success(let response):
-                    let resposta = try! JSONDecoder().decode(Response.self, from: response.data)
-                    print(resposta)
-                case .failure(let error):
-                    print(error)
+            case .success(let response):
+                let resposta = try! JSONDecoder().decode(Response.self, from: response.data)
+                let alert  = UIAlertController(title: "Parabens", message: resposta.body, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            case .failure(let error):
+                print(error)
             }
         }
     }
